@@ -1,0 +1,18 @@
+<script>
+  galleryImages = [
+    "img/dragonfly.jpg",
+    "img/forest.jpg",
+    "img/goat.jpg",
+    "img/monkey.jpg"];
+
+    $.each( galleryImages, function() {
+      $( "#imageGallery" ).html(
+        $("#imageGallery").html()
+        + '<a href="' + this + '"><img class="imageThumbnail" src="' + this + '"></a>'
+      );
+    });
+</script>
+
+<h1>Image Gallery</h1>
+
+<div id="imageGallery"></div>

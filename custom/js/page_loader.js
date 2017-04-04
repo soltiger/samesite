@@ -14,22 +14,30 @@ function addSitePage( title, tag, url ) {
   // Add navigation link
   $( ".nav" ).html(
       $( ".nav" ).html()
-      + '<li>'
+      + '<li id="' + tag + '">'
       + '<a href="#page=' + tag + '">' + title + '</a>'
       + '</li>'
       )
 }
 
+function clearActiveStatus() {
+  $.each( Object.keys( sitePages ), function() {
+    $( "#" + sitePages[ this ].tag, document ).removeClass( "active" );
+  } );
+}
+
 function changePage() {
-  var page = getUrlParameter("#page");
+  clearActiveStatus();
+
+  var page = getUrlParameter( "#page" );
 
   // If page param not given, display first page in sitePages (if exists)
   if( page === undefined ) {
     if( Object.keys( sitePages ).length ) {
-      var url = sitePages[ Object.keys( sitePages )[0] ].url;
+      page = Object.keys( sitePages )[0];
     }
     else {
-      var url = "No pages!";
+      var url = "empty.html";
     }
   }
   // Otherwise by default show not found
@@ -41,6 +49,8 @@ function changePage() {
   pageData = sitePages[ page ];
   if( pageData !== undefined ) {
     url = pageData.url;
+    $( "#" + pageData.tag, document ).addClass( "active" );
+    $( "#sidebarTitle" ).html( "Current Page: " + pageData.title );
   }
 
   // Fetch page
