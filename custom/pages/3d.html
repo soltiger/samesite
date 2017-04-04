@@ -1,7 +1,194 @@
-<h1>Page 3 is awesome</h1>
+<style>
+</style>
+
+<div style="width:100%; height: 100%">
+	<div id="header" style="height: 5%; width:100%;"><h1>Three.js tree example: Rotate and zoom with mouse</h1></div>
+	<div id="threeJsContainer" style="height: 100%; float:left; width:70%;"></div>
+	<div id="info" style="height: 100%; float:left; width:30%;"></div>
+</div>
+
+<script src="tree/js/three.min.js"></script>
+<script src="tree/js/Projector.js"></script>
+<script src="tree/js/CanvasRenderer.js"></script>
+<script src="tree/js/OrbitControls.js"></script>
 
 <script>
-   $( function() {
-      $( "#status" ).html( "3" );
-   });
+	var scene, renderer, camera, controls, container;
+	var leafImgs = [], leafMaterials = [], planes = [];
+	var trunk;
+	var projector = { x: 0, y: 0 };
+	var mouse = { x: 0, y: 0 };
+
+	init();
+	createTrunk();
+	loadTextures();
+	createPlanes();
+	createControls( camera );
+	createLight();
+
+	function update () {
+		render();
+
+		controls.update();
+
+		requestAnimationFrame(update);
+	}
+
+	function render() {
+		renderer.render( scene, camera );
+	}
+
+	function onThreeJsMouseMove( event )  {
+		for(var i=0;i<planes.length;i++) {
+			planes[i].material.opacity = 0.5;
+		}
+
+		var containerPos = container.getBoundingClientRect();
+
+		mouse.x = ( (event.clientX-containerPos.left) / container.clientWidth ) * 2 - 1;
+		mouse.y = - ( (event.clientY-containerPos.top) / container.clientHeight ) * 2 + 1;
+
+		var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+		projector.unprojectVector( vector, camera );
+		var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
+		var intersects = ray.intersectObjects( planes );
+
+		if ( intersects.length > 0 ) {
+			html = '<h1>Leaf #' + intersects[ 0 ].object.userData.leafId + ' selected</h1><img src="'+intersects[ 0 ].object.userData.imgSrc+'"><br>';
+			html += 'X Position = ' + intersects[ 0 ].object.position.x + "<br>";
+			html += 'Y Position = ' + intersects[ 0 ].object.position.y + "<br>";
+			html += 'Z Position = ' + intersects[ 0 ].object.position.z + "<br>";
+
+			html += 'X Rotation = ' + intersects[ 0 ].object.rotation.x*180/Math.PI + "°<br>";
+			html += 'Y Rotation = ' + intersects[ 0 ].object.rotation.y*180/Math.PI + "°<br>";
+			html += 'Z Rotation = ' + intersects[ 0 ].object.rotation.z*180/Math.PI + "°<br>";
+
+			$("#info").html( html );
+			intersects[ 0 ].object.material.opacity = 1;
+		}
+
+	}
+
+	function init() {
+		// Get the DOM element to attach to
+		container = document.getElementById( 'threeJsContainer' );
+
+		// Set the scene size.
+		const WIDTH = container.clientWidth;
+		const HEIGHT = container.clientHeight;
+
+		// Set some camera attributes.
+		const VIEW_ANGLE = 45;
+		const ASPECT = WIDTH / HEIGHT;
+		const NEAR = 0.1;
+		const FAR = 10000;
+
+		// Create a WebGL renderer, camera and a scene
+		renderer = new THREE.CanvasRenderer();
+
+		camera = new THREE.PerspectiveCamera(
+			VIEW_ANGLE,
+			ASPECT,
+			NEAR,
+			FAR
+		);
+		camera.position.set(100,0,150);
+
+		scene = new THREE.Scene();
+		scene.add(camera);
+		renderer.setSize(WIDTH, HEIGHT);
+		container.appendChild(renderer.domElement);
+
+		projector = new THREE.Projector();
+
+		container.addEventListener( 'mousemove', onThreeJsMouseMove, false );
+	}
+
+	function loadTextures() {
+		leafImgs[0] = new THREE.TextureLoader().load( 'tree/img/leaf_1.png' );
+		leafImgs[1] = new THREE.TextureLoader().load( 'tree/img/leaf_2.jpg' );
+
+		leafMaterials[0] = new THREE.MeshBasicMaterial( { map: leafImgs[0], side: THREE.DoubleSide, transparent: true, opacity: 0.5} );
+		leafMaterials[1] = new THREE.MeshBasicMaterial( { map: leafImgs[1], side: THREE.DoubleSide, transparent: true, opacity: 0.5 } );
+	}
+
+	function createTrunk() {
+		var geometry = new THREE.CylinderGeometry( 1, 10, 120, 6 );
+		var trunkMaterial = new THREE.MeshBasicMaterial( {color: 0x006600, transparent: true, opacity: 0.5} );
+		trunk = new THREE.Mesh( geometry, trunkMaterial );
+		trunk.position.set(0,20,0);
+		scene.add( trunk );
+	}
+
+	function createPlanes() {
+		planes[0] = new THREE.Mesh( new THREE.PlaneGeometry( 413 / 10, 383 / 10, 10, 10 ), leafMaterials[0] );
+		planes[1] = new THREE.Mesh( new THREE.PlaneGeometry( 413 / 10, 383 / 10, 10, 10 ), leafMaterials[0].clone() );
+		planes[2] = new THREE.Mesh( new THREE.PlaneGeometry( 413 / 10, 383 / 10, 10, 10 ), leafMaterials[0].clone() );
+		planes[3] = new THREE.Mesh( new THREE.PlaneGeometry( 413 / 10, 383 / 10, 10, 10 ), leafMaterials[0].clone() );
+		planes[4] = new THREE.Mesh( new THREE.PlaneGeometry( 253 / 10, 380 / 10, 10, 10 ), leafMaterials[1] );
+		planes[5] = new THREE.Mesh( new THREE.PlaneGeometry( 253 / 10, 380 / 10, 10, 10 ), leafMaterials[1].clone() );
+		planes[6] = new THREE.Mesh( new THREE.PlaneGeometry( 253 / 10, 380 / 10, 10, 10 ), leafMaterials[1].clone() );
+		planes[7] = new THREE.Mesh( new THREE.PlaneGeometry( 253 / 10, 380 / 10, 10, 10 ), leafMaterials[1].clone() );
+
+		planes[0].position.set(0,0,25);
+		planes[0].rotation.set((90 * Math.PI)/180, (90 * Math.PI)/180, 0);
+		planes[0].userData.imgSrc = "tree/img/leaf_1.png";
+
+		planes[1].position.set(0,0,-25);
+		planes[1].rotation.set((270 * Math.PI)/180, (90 * Math.PI)/180, 0);
+		planes[1].userData.imgSrc = "tree/img/leaf_1.png";
+
+		planes[2].position.set(-25,0,0);
+		planes[2].rotation.set(0, 0, (90 * Math.PI)/180);
+		planes[2].userData.imgSrc = "tree/img/leaf_1.png";
+
+		planes[3].position.set(25,0,0);
+		planes[3].rotation.set(0, 0, (270 * Math.PI)/180);
+		planes[3].userData.imgSrc = "tree/img/leaf_1.png";
+
+		planes[4].position.set(0,50,25);
+		planes[4].rotation.set((90 * Math.PI)/180, (90 * Math.PI)/180, 0);
+		planes[4].userData.imgSrc = "tree/img/leaf_2.jpg";
+
+		planes[5].position.set(0,50,-25);
+		planes[5].rotation.set((270 * Math.PI)/180, (90 * Math.PI)/180, 0);
+		planes[5].userData.imgSrc = "tree/img/leaf_2.jpg";
+
+		planes[6].position.set(-25, 50,0);
+		planes[6].rotation.set(0, 0, (90 * Math.PI)/180);
+		planes[6].userData.imgSrc = "tree/img/leaf_2.jpg";
+
+		planes[7].position.set(25, 50,0);
+		planes[7].rotation.set(0, 0, (270 * Math.PI)/180);
+		planes[7].userData.imgSrc = "tree/img/leaf_2.jpg";
+
+		for(var i=0;i<planes.length;i++) {
+			planes[ i ].userData.leafId = i;
+			scene.add( planes[i] );
+		}
+	}
+
+	function createControls( obj ) {
+		controls = new THREE.OrbitControls( obj, renderer.domElement );
+		controls.enableZoom = true;
+		controls.zoomSpeed = 5.0;
+		controls.addEventListener( 'change', render );
+	}
+
+	function createLight() {
+		// create a point light
+		const pointLight = new THREE.PointLight(0xFFFFFF);
+
+		// set its position
+		pointLight.position.x = 10;
+		pointLight.position.y = 50;
+		pointLight.position.z = 130;
+
+		// add to the scene
+		scene.add( pointLight );
+	}
+
+	// Schedule the first frame.
+	requestAnimationFrame( update );
 </script>
