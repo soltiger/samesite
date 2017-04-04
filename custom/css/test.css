@@ -1,0 +1,11 @@
+.testBorder {
+	border: solid red 1px;
+}
+
+.sidebar {
+	border: solid #bbbbbb 1px;
+}
+
+.mainArea {
+	border: solid #bbbbbb 1px;
+}
