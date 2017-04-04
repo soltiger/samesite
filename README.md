@@ -6,8 +6,10 @@ Build the same small testsite using different platforms
 
 # Platforms:
 
-* Custom - Small custom project
-* Hugo
+* Custom - Single page app using custom minimal site "framework"
+* TODO: Hugo - Static website generated with Hugo
+* TODO: Jekyll - Static website generated with Hugo
+* TODO: React - Sinle page app using React.js
 
 # Dependencies / Tools:
 
@@ -19,6 +21,10 @@ The test site uses [jQuery](https://jquery.com/), [Bootstrap](http://getbootstra
 
 * ( [Mongoose](https://github.com/cesanta/mongoose) to quickly set up html server )
 
-## Hugo
+## TODO: Hugo
 
 * [Hugo](https://gohugo.io/overview/introduction/)
+
+## TODO: Jekyll
+
+## TODO: React
