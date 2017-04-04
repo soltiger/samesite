@@ -13,7 +13,7 @@ Build the same small testsite using different platforms
 
 ## Common
 
-The test site has dependencies to jQuery and bootstrap
+The test site uses [jQuery](https://jquery.com/), [Bootstrap](http://getbootstrap.com/) and to [three.js](https://threejs.org/)
 
 ## Custom
 
