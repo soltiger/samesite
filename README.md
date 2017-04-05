@@ -7,7 +7,7 @@ Build the same small testsite using different platforms
 # Platforms:
 
 * Custom - Single page app using custom minimal site "framework"
-* TODO: Hugo - Static website generated with Hugo
+* Hugo - Static website generated with Hugo
 * TODO: Jekyll - Static website generated with Hugo
 * TODO: React - Sinle page app using React.js
 
@@ -21,7 +21,7 @@ The test site uses [jQuery](https://jquery.com/), [Bootstrap](http://getbootstra
 
 * ( [Mongoose](https://github.com/cesanta/mongoose) to quickly set up html server )
 
-## TODO: Hugo
+## Hugo
 
 * [Hugo](https://gohugo.io/overview/introduction/)
 
