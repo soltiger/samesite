@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-xs-12">
+    <span id="sidebarTitle">
+      Current page:
+      {{- range .Site.Menus.main }}
+        {{ if ($.IsMenuCurrent "main" .) }}{{ .Name }}{{ end }}
+      {{- end }}
+    </span>
+  </div>
+</div>

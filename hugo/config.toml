@@ -1,0 +1,6 @@
+languageCode = "en-us"
+title = "Samesite - Hugo"
+baseURL = "http://127.0.0.1"
+
+[params]
+	Author = "soltiger"

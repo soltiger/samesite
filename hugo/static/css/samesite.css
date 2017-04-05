@@ -1,0 +1,16 @@
+.sidebar {
+	border: solid #bbbbbb 1px;
+}
+
+html, body, .container, .mainArea {
+	height: 100%;
+}
+
+.imageThumbnail {
+	max-width: 300px;
+	max-height: 100%;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	height: 200px;
+	width: auto;
+}

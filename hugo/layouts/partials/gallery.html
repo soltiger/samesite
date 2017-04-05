@@ -1,0 +1,10 @@
+{{- $path := "/static/img" -}}
+{{- $urlPath := "/img" -}}
+{{- $files := readDir $path -}}
+
+<div id="imageGallery">
+  {{- range $files }}
+    {{- $file := ( print $urlPath print "/" .Name ) -}}
+    <a href="{{- $file -}}"><img class="imageThumbnail" src="{{- $file -}}"></a>
+  {{- end }}
+</div>

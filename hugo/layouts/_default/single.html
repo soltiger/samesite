@@ -1,0 +1,23 @@
+{{ partial "header.html" . }}
+
+{{ partial "navbar.html" . }}
+
+<div class="container">
+  <div class="col-xs-10 mainArea">
+    {{ $.Content }}
+
+    {{- range .Site.Menus.main }}
+      {{- if $.IsMenuCurrent "main" . }}
+        {{- if eq .Name "Gallery" }}
+          {{ partial "gallery.html" . }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+  </div>
+
+  <div class="col-xs-2 sidebar" >
+    {{ partial "sidebar.html" . }}
+  </div>
+</div>
+
+{{ partial "footer.html" . }}
