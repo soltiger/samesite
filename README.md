@@ -8,8 +8,8 @@ Build the same small testsite using different platforms
 
 * Custom - Single page app using custom minimal site "framework"
 * Hugo - Static website generated with Hugo
-* TODO: Jekyll - Static website generated with Hugo
-* TODO: React - Sinle page app using React.js
+* TODO: Jekyll - Static website generated with Jekyll
+* TODO: React - Single page app using React.js
 
 # Dependencies / Tools:
 
