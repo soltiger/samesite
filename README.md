@@ -1,30 +1,44 @@
-# samesite
+# Samesite
 
 # Description
 
-Same small testsite build using different platforms
+Same small testsite build using different platforms.
 
-# Platforms:
+## Depencencies
 
-* Custom - Single page app using custom minimal site "framework"
-* Hugo - Static website generated with Hugo
-* TODO: Jekyll - Static website generated with Jekyll
-* TODO: React - Single page app using React.js
+* [jQuery v3.2.1](https://jquery.com/)
+* [Bootstrap v3.3.7](http://getbootstrap.com/)
+* [three.js v0.84.0](https://threejs.org/)
 
-# Dependencies / Tools:
+# Samesite - Custom
 
-## Common
+## Description
 
-The test site uses [jQuery](https://jquery.com/), [Bootstrap](http://getbootstrap.com/) and to [three.js](https://threejs.org/)
+Single page app using custom minimal proof-of-concept "framework". 
 
-## Custom
+## Depencencies
 
-* ( [Mongoose](https://github.com/cesanta/mongoose) to quickly set up html server )
+* [jQuery v3.2.1](https://jquery.com/)
 
-## Hugo
+## How to setup
 
-* [Hugo](https://gohugo.io/overview/introduction/)
+Host site with your favourite http server. [Mongoose](https://github.com/cesanta/mongoose) is great for testing.
+ 
+# Samesite - Hugo
 
-## TODO: Jekyll
+## Description
 
-## TODO: React
+Static website generated with Hugo.
+
+## Depencencies
+
+* [Hugo v.019](https://gohugo.io/overview/introduction/)
+
+## How to setup
+
+* Install hugo. 
+* Run `hugo server`.
+
+# TODO: Jekyll
+
+# TODO: React
