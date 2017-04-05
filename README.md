@@ -2,7 +2,7 @@
 
 # Description
 
-Build the same small testsite using different platforms
+Same small testsite build using different platforms
 
 # Platforms:
 
