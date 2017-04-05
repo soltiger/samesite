@@ -1,10 +1,10 @@
 # Samesite
 
-## Description
+### Description
 
 Same small testsite build using different platforms.
 
-## Depencencies
+### Depencencies
 
 * [jQuery v3.2.1](https://jquery.com/)
 * [Bootstrap v3.3.7](http://getbootstrap.com/)
@@ -12,29 +12,29 @@ Same small testsite build using different platforms.
 
 # Samesite - Custom
 
-## Description
+### Description
 
 Single page app using custom minimal proof-of-concept "framework". 
 
-## Depencencies
+### Depencencies
 
 * [jQuery v3.2.1](https://jquery.com/)
 
-## How to setup
+### How to setup
 
 Host site with your favourite http server. [Mongoose](https://github.com/cesanta/mongoose) is great for testing.
  
 # Samesite - Hugo
 
-## Description
+### Description
 
 Static website generated with Hugo.
 
-## Depencencies
+### Depencencies
 
 * [Hugo v.019](https://gohugo.io/overview/introduction/)
 
-## How to setup
+### How to setup
 
 * Install hugo. 
 * Run `hugo server`.
